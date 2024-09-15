@@ -8,5 +8,6 @@ const login_post = (req, res) => {
 }
 
 module.exports = {
-    login_get
+    login_get,
+    login_post
 }

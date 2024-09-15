@@ -2,9 +2,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const apiRoute = require('./routes/api/apiRoute')
 const dashboardRoute = require('./routes/web/dashboardRoute');
 const authRoute = require('./routes/web/authRoute');
-const User = require('./models/user');
 
 // the app
 const app = express();
