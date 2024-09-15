@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const homeRoute = require('./routes/web/homeRoute');
+const dashboardRoute = require('./routes/web/dashboardRoute');
 const authRoute = require('./routes/web/authRoute');
 const User = require('./models/user');
 
@@ -32,28 +32,11 @@ app.use([
     cookieParser()
 ]);
 
-// test url
-app.get('/add-user', (req, res) => {
-    const user = new User({
-        fullName: 'البراء عمر خلف الله',
-        email: 'albaraomer445@gmail.com',
-        address: 'Shendi',
-        phoneNumber: 926699368,
-        picture: 'Albara Picture',
-        password: '123456789'
-    });
-    user.save()
-        .then((result) => {
-            res.send(result);
-        })
-        .catch((err) => {
-            console.log(err);
-
-        });
-})
-
-// home page router
-app.use('/', homeRoute);
+// API Router
+app.use('/api/v1/', apiRoute);
 
 // Auth pages route
-app.use('/', authRoute);
+app.use('/login', authRoute);
+
+// home page router
+app.use('/dashboard', dashboardRoute);
