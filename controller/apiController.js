@@ -1,22 +1,22 @@
 const singup_post = (req, res) => {
-
+    res.send('sing up successfull');
 };
 
 const login_post = (req, res) => {
-
+    res.send('log in successfull');
 };
 
-const device_get = (req, res) => {
+const detectdevice_get = (req, res) => {
+    res.send('This is the data of the device you looking for');
+}
 
-};
-
-const devices_get = (req, res) => {
-
+const user_put = (req, res) => {
+    res.send('User data update successfull');
 }
 
 module.exports = {
     login_post,
     singup_post,
-    device_get,
-    devices_get
-}
+    detectdevice_get,
+    user_put
+};

@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const apiRoute = require('./routes/api/apiRoute')
+const deviceRoute = require('./routes/api/deviceRoute');
 const dashboardRoute = require('./routes/web/dashboardRoute');
 const authRoute = require('./routes/web/authRoute');
 
@@ -34,6 +35,9 @@ app.use([
 
 // API Router
 app.use('/api/v1/', apiRoute);
+
+// API Device Router
+app.use('/api/v1/devices', deviceRoute);
 
 // Auth pages route
 app.use('/login', authRoute);
