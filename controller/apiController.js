@@ -1,4 +1,6 @@
 const singup_post = (req, res) => {
+    console.log('test point');
+
     res.send('sing up successfull');
 };
 

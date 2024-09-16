@@ -34,7 +34,7 @@ app.use([
 ]);
 
 // API Router
-app.use('/api/v1/', apiRoute);
+app.use('/api/v1', apiRoute);
 
 // API Device Router
 app.use('/api/v1/devices', deviceRoute);

@@ -8,4 +8,5 @@ const dashboard_post = (req, res) => {
 
 module.exports = {
     dashboard_get,
+    dashboard_post
 }
