@@ -1,11 +1,38 @@
-const singup_post = (req, res) => {
-    console.log('test point');
+const User = require('../models/user');
 
-    res.send('sing up successfull');
+
+// This function is use to receive the user date and stor it in the DB
+const singup_post = (req, res) => {
+    const newUserData = req.body ;
+    let allUser = '';
+
+    User.find()
+    .then((result) => {
+        allUser = result; 
+    })
+    .catch((err) => {
+        console.log(err);
+        
+    });
+    console.log(allUser);
+    res.send('testing')
+    
+    
+    // const newUser = new User(newUserData);
+    // newUser.save()
+    // .then((result) => {
+    //     console.log();
+    //     res.send({statuse: 'singup sccessfull', userID: result, aba: allUser});
+    // })
+    // .catch((err) => {
+    //     console.log(err);
+        
+    // })
+    
 };
 
 const login_post = (req, res) => {
-    res.send('log in successfull');
+
 };
 
 const detectdevice_get = (req, res) => {
