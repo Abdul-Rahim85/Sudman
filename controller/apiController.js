@@ -1,33 +1,24 @@
 const User = require('../models/user');
+const {getDb} = require('../db');
 
+let db = getDb();
 
 // This function is use to receive the user date and stor it in the DB
-const singup_post = (req, res) => {
+const  singup_post = async (req, res) => {
     const newUserData = req.body ;
     let allUser = '';
 
-    User.find()
-    .then((result) => {
-        allUser = result; 
-    })
-    .catch((err) => {
-        console.log(err);
-        
-    });
-    console.log(allUser);
-    res.send('testing')
+    // const users = await User.find()
     
-    
-    // const newUser = new User(newUserData);
-    // newUser.save()
-    // .then((result) => {
-    //     console.log();
-    //     res.send({statuse: 'singup sccessfull', userID: result, aba: allUser});
-    // })
-    // .catch((err) => {
-    //     console.log(err);
-        
-    // })
+    db.collection('users')
+    .insertOne(newUserData)
+        .then((result) => {
+            res.status(201).json(result);
+        })
+        .catch(err => {
+            res.status(500).json({error: ["This user is already exist", err]});
+            
+        })
     
 };
 
