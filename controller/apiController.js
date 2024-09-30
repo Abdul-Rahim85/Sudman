@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Device = require('../models/device');
 
 // This function is use to receive the user date and stor it in the DB
 const  singup_post = async (req, res) => {
@@ -35,9 +36,9 @@ const  singup_post = async (req, res) => {
 
 const login_post = async (req, res) => {
     const user = req.body;
-    const existsUser = await User.find({phoneNumber: user.phoneNumber, password: user.password});
+    const existsUser = await User.findOne({phoneNumber: user.phoneNumber, password: user.password});
     
-    if(existsUser.length > 0) {
+    if(existsUser.length) {
         res.status(200).json({massage: "User is exists", User: existsUser});
     } else {
         res.status(404).json({massage: "User is not exists"});
@@ -45,8 +46,15 @@ const login_post = async (req, res) => {
     
 };
 
-const detectdevice_get = (req, res) => {
-    res.send('This is the data of the device you looking for');
+const detectdevice_get = async (req, res) => {
+    const deviceSN = req.params.id;
+    const deviceDetails = await Device.findOne({serialNum: deviceSN});
+
+    if(deviceDetails) {
+        res.status(200).json({massage: "Device is exists", deviceDetails});
+    } else {
+        res.status(404).json({massage: "Device is not exists"});
+    }
 }
 
 const user_put = (req, res) => {

@@ -35,3 +35,18 @@ const deviceSchema = new Schema({
 const Device = mongoose.model('Device', deviceSchema);
 
 module.exports = Device;
+
+// a device data
+/*
+
+    
+{
+    "serialNum" : 123456789,
+    "deviceName" : "J6+",
+    "deviceOwner" : "66faf718776da5719dbf4a91",
+    "deviceBrand" : "Samsung",
+    "deviceCategory" : "Smart Phone",
+    "deviceColor": "Black",
+    "deviceStatus" : false
+}
+*/
