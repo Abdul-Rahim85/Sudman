@@ -6,31 +6,22 @@ const apiRoute = require('./routes/api/apiRoute')
 const deviceRoute = require('./routes/api/deviceRoute');
 const dashboardRoute = require('./routes/web/dashboardRoute');
 const authRoute = require('./routes/web/authRoute');
-const {connectToDb, getDb} = require('./db');
 
 // the app
 const app = express();
 const PORT = 3000;
 
-// db connection
-connectToDb((err) => {
-    if(!err) {
-        app.listen(PORT);
-    } 
-});
+// htis uri is to connect to the DB 
+const dbConnectionString = 'mongodb+srv://Abdu:Abdo2204@sudmandb.g9jq8k2.mongodb.net/sudmandb?retryWrites=true&w=majority&appName=sudmanDB';
+mongoose.connect(dbConnectionString, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then((result) => {
+        console.log('connecting to the Database sccesfull');
+        app.listen(PORT)
+    })
+    .catch((err) => {
+        console.log(err);
 
-
-// // htis uri is to connect to the DB 
-// const dbConnectionString = 'mongodb+srv://Abdu:Abdo2204@sudmandb.g9jq8k2.mongodb.net/sudmandb?retryWrites=true&w=majority&appName=sudmanDB';
-// mongoose.connect(dbConnectionString, { useNewUrlParser: true, useUnifiedTopology: true })
-//     .then((result) => {
-//         console.log('connecting to the Database sccesfull');
-//         app.listen(PORT)
-//     })
-//     .catch((err) => {
-//         console.log(err);
-
-//     })
+    })
 
 // app setting
 app.set('view engine', 'ejs');

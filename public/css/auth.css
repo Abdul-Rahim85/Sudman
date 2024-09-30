@@ -1,0 +1,18 @@
+main{
+  padding: 0;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+main .left-section{
+  width: 55%;
+  height: 100%;
+  background-color: red;
+}
+
+main .right-section{
+  width: 45%;
+  height: 100%;
+  background-color: yellow;
+}

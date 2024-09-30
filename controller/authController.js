@@ -1,6 +1,6 @@
 // this function render the login page to the browser
 const login_get = (req, res) => {
-    res.send('Login page');
+    res.render('./auth/login');
 }
 
 const login_post = (req, res) => {

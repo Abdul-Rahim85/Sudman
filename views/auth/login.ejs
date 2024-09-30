@@ -1,9 +1,31 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-    <%- include('../layout/head.ejs') %>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/auth.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <title>Sudman</title>
+    </head>
 <body>
-    <%- include('../layout/homeHeader.ejs') %>
-
+        <main>
+            <section class="left-section">idiot</section>
+            <section class="right-section">
+                <img src="#" alt="System logo">
+                <p>تسجيل الدخول</p>
+                <form action="/login" method="POST">
+                    <label for="username">إسم المستخدم
+                        <input type="text" id="username" name="userName" required>
+                    </label>
+                    <label for="password">
+                        <input type="password" id="password" name="passWord" required>
+                    </label>
+                    <input type="submit" value="تسجيل الدخول">
+                </form>
+            </section>
+        </main>
     <%- include('../layout/footer.ejs') %>
 </body>
 </html>
