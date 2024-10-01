@@ -80,6 +80,18 @@ const deviceLost_put = async (req, res) => {
     }
 }
 
+// This function is used to delete user device
+const device_delete = async (req, res) => {
+
+    if (await Device.findById(req.params.id)){
+        await Device.findByIdAndDelete(req.params.id);
+        res.status(200).json({massage: "User device deleted successfull"});
+
+    } else {
+        res.status(404).json({massage: "There is no device with this id!"})
+    }
+}
+
 // This function is use to get the new owner detailse
 const owner_get = async (req, res) => {
     const newOwner = await User.findOne({phoneNumber: req.params.id});
@@ -100,18 +112,6 @@ const transferownership_put = async (req, res) => {
         res.status(200).json({massage: "Device ownership transfer successfully", newDeviceOwner});
     } else {
         res.status(404).json({massage: "There is no device with this id"});
-    }
-}
-
-// This function is used to delete user device
-const device_delete = async (req, res) => {
-
-    if (await Device.findById(req.params.id)){
-        await Device.findByIdAndDelete(req.params.id);
-        res.status(200).json({massage: "User device deleted successfull"});
-
-    } else {
-        res.status(404).json({massage: "There is no device with this id!"})
     }
 }
 

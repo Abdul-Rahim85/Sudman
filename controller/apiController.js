@@ -60,8 +60,14 @@ const detectdevice_get = async (req, res) => {
 }
 
 // This function is used to update user personal data
-const user_put = (req, res) => {
-    res.send('User data update successfull');
+const user_put = async (req, res) => {
+
+    if(await User.findById(req.params.id)) {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body);
+        res.status(200).json({massage: "User personal data update successfully"}, updatedUser);
+    } else {
+        res.status(404).json({massage: "There is no user with this id!"});
+    }
 }
 
 module.exports = {
