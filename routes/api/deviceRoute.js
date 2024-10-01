@@ -3,8 +3,9 @@ const deviceController = require('../../controller/deviceController');
 
 const deviceRoute = express.Router();
 
-deviceRoute.get('/', deviceController.devices_get); //This route is use to RETRIEVE all devices
-deviceRoute.get('/:id', deviceController.device_get); //This route is use to RETRIEVE the details of the one of the user device
+deviceRoute.get('/:id', deviceController.devices_get); //This route is use to RETRIEVE all devices
+deviceRoute.get('/details/:id', deviceController.device_get); //This route is use to RETRIEVE the details of the one of the user device
+deviceRoute.get('/owner/:id', deviceController.owner_get); //This route is use to return the new owner details
 deviceRoute.post('/', deviceController.device_post); //This route is use to ADD new device
 deviceRoute.put('/:id', deviceController.device_put); // This route is use to UPDATE a device data
 deviceRoute.put('/lost/:id', deviceController.deviceLost_put) //This route is use to set if the device is lost or not

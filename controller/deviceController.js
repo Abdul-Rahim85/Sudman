@@ -1,11 +1,26 @@
+const User = require('../models/user');
 const Device = require('../models/device');
 
-const devices_get = (req, res) => {
-    res.send('response for the request that request all devices');
+// This function get all devices that belong to spcefic user
+const devices_get = async (req, res) => {
+    const allDevice = await Device.find({deviceOwner: req.params.uid});
+
+    if(allDevice.length > 0){
+        res.status(200).json({massage: "successfull retriving user devices", devices: allDevice});
+    } else {
+        res.status(404).json({massage: "This user has no devices"})
+    }
 };
 
-const device_get = (req, res) => {
-    res.send('response for the request that request one device');
+// This function get one device that belong to spcefic user
+const device_get = async (req, res) => {
+    const deviceDetails = await Device.findById(req.params.id);
+    
+    if(deviceDetails){
+        res.status(200).json({massage: "Success finding device details", deviceDetails});
+    } else {
+        res.status(404).json({massage: "There is no device with this id"});
+    }
 }
 
 // This function is used to add new device to the database.
@@ -33,28 +48,71 @@ const device_post = async (req, res) => {
         const createNewDevice = new Device(newDeviceData);
         createNewDevice.save()
         .then(newDevice => {
-            res.status(201).json({massage: 'New user created successfully', newDevice});
+            res.status(201).json({massage: 'New Device created successfully', newDevice});
         })
         .catch(err => {
-            res.status(500).send({massage: "can'n create this user", error: err})
+            res.status(500).send({massage: "can'n create this Device", error: err})
         });
     }
 }
 
-const device_put = (req, res) => {
-    res.send('response for the request that request to update a device data');
+// This function is use to updat a device data
+const device_put = async (req, res) => {
+
+    if(await Device.findById(req.params.id)){
+        const lostDevice = await Device.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    
+        res.status(200).json({massage: "Device data update successfully", lostDevice});
+    } else {
+        res.status(404).json({massage: "There is no device with this id!"})
+    }
 }
 
-const deviceLost_put = (req, res) => {
-    res.send('response for the request that request to tell that the device is missing');
+// This function is use to set a device status LOST!
+const deviceLost_put = async (req, res) => {
+
+    if(await Device.findById(req.params.id)){
+        const lostDevice = await Device.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    
+        res.status(200).json({massage: "Set device as lost successfull", lostDevice});
+    } else {
+        res.status(404).json({massage: "There is no device with this id!"})
+    }
 }
 
-const transferownership_put = (req, res) => {
-    res.send('response for the request that request to transfer the ownership');
+// This function is use to get the new owner detailse
+const owner_get = async (req, res) => {
+    const newOwner = await User.findOne({phoneNumber: req.params.id});
+
+    if(newOwner){
+        res.status(200).json({massage: "User to transfer ownership to him", newOwner})
+    } else {
+        res.status(404).json({massage: "No user exists with this phone number"});
+    }
 }
 
-const device_delete = (req, res) => {
-    res.send('response for the request that request to delete this device');
+// This function is use to transfer ownership of a device from user to anther
+const transferownership_put = async (req, res) => {
+    const transformerDevice = await Device.findById(req.params.id);
+
+    if(transformerDevice) {
+        const newDeviceOwner = await Device.findByIdAndUpdate(req.params.id, req.body);
+        res.status(200).json({massage: "Device ownership transfer successfully", newDeviceOwner});
+    } else {
+        res.status(404).json({massage: "There is no device with this id"});
+    }
+}
+
+// This function is used to delete user device
+const device_delete = async (req, res) => {
+
+    if (await Device.findById(req.params.id)){
+        await Device.findByIdAndDelete(req.params.id);
+        res.status(200).json({massage: "User device deleted successfull"});
+
+    } else {
+        res.status(404).json({massage: "There is no device with this id!"})
+    }
 }
 
 module.exports = {
@@ -63,6 +121,7 @@ module.exports = {
     device_post,
     device_put,
     deviceLost_put,
+    owner_get,
     transferownership_put,
     device_delete
 }

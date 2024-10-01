@@ -34,6 +34,7 @@ const  singup_post = async (req, res) => {
     }
 };
 
+// This function is check if the user tring to log in has an account or not
 const login_post = async (req, res) => {
     const user = req.body;
     const existsUser = await User.findOne({phoneNumber: user.phoneNumber, password: user.password});
@@ -46,6 +47,7 @@ const login_post = async (req, res) => {
     
 };
 
+// This function is used to get a device details includeing device owner
 const detectdevice_get = async (req, res) => {
     const deviceSN = req.params.id;
     const deviceDetails = await Device.findOne({serialNum: deviceSN});
@@ -57,6 +59,7 @@ const detectdevice_get = async (req, res) => {
     }
 }
 
+// This function is used to update user personal data
 const user_put = (req, res) => {
     res.send('User data update successfull');
 }
