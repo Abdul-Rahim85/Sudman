@@ -11,10 +11,8 @@
   "keywords": [
     "sudman"
   ],
-  "author": [
+  "author":
     "Abdulrahim Muhamed Abdulrahim",
-    "Albra Omar Khlaf allah"
-  ],
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
