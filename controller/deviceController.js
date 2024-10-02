@@ -3,7 +3,7 @@ const Device = require('../models/device');
 
 // This function get all devices that belong to spcefic user
 const devices_get = async (req, res) => {
-    const allDevice = await Device.find({deviceOwner: req.params.uid});
+    const allDevice = await Device.find({deviceOwner: req.params.id});
 
     if(allDevice.length > 0){
         res.status(200).json({massage: "successfull retriving user devices", devices: allDevice});
@@ -70,8 +70,9 @@ const device_put = async (req, res) => {
 
 // This function is use to set a device status LOST!
 const deviceLost_put = async (req, res) => {
+    const lostDevice = await Device.findById(req.params.id)
 
-    if(await Device.findById(req.params.id)){
+    if(lostDevice){
         const lostDevice = await Device.findByIdAndUpdate(req.params.id, req.body, {new: true});
     
         res.status(200).json({massage: "Set device as lost successfull", lostDevice});
@@ -108,7 +109,7 @@ const transferownership_put = async (req, res) => {
     const transformerDevice = await Device.findById(req.params.id);
 
     if(transformerDevice) {
-        const newDeviceOwner = await Device.findByIdAndUpdate(req.params.id, req.body);
+        const newDeviceOwner = await Device.findByIdAndUpdate(req.params.id, req.body, {new: true})        
         res.status(200).json({massage: "Device ownership transfer successfully", newDeviceOwner});
     } else {
         res.status(404).json({massage: "There is no device with this id"});

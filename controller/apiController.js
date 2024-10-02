@@ -37,9 +37,9 @@ const  singup_post = async (req, res) => {
 // This function is check if the user tring to log in has an account or not
 const login_post = async (req, res) => {
     const user = req.body;
-    const existsUser = await User.findOne({phoneNumber: user.phoneNumber, password: user.password});
+    const existsUser = await User.findOne(user);
     
-    if(existsUser.length) {
+    if(existsUser) {
         res.status(200).json({massage: "User is exists", User: existsUser});
     } else {
         res.status(404).json({massage: "User is not exists"});
@@ -51,9 +51,10 @@ const login_post = async (req, res) => {
 const detectdevice_get = async (req, res) => {
     const deviceSN = req.params.id;
     const deviceDetails = await Device.findOne({serialNum: deviceSN});
+    const deviceOwner = await User.findById(deviceDetails.deviceOwner);
 
-    if(deviceDetails) {
-        res.status(200).json({massage: "Device is exists", deviceDetails});
+    if(deviceDetails && deviceOwner) {
+        res.status(200).json({massage: "Device is exists", deviceDetails, deviceOwner});
     } else {
         res.status(404).json({massage: "Device is not exists"});
     }
@@ -64,7 +65,7 @@ const user_put = async (req, res) => {
 
     if(await User.findById(req.params.id)) {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body);
-        res.status(200).json({massage: "User personal data update successfully"}, updatedUser);
+        res.status(200).json({massage: "User personal data update successfully", updatedUser});
     } else {
         res.status(404).json({massage: "There is no user with this id!"});
     }
