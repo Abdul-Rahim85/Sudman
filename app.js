@@ -6,6 +6,7 @@ const apiRoute = require('./routes/api/apiRoute')
 const deviceRoute = require('./routes/api/deviceRoute');
 const dashboardRoute = require('./routes/web/dashboardRoute');
 const authRoute = require('./routes/web/authRoute');
+require('dotenv').config();
 
 // the app
 const app = express();
