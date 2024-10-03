@@ -9,7 +9,7 @@ const authRoute = require('./routes/web/authRoute');
 
 // the app
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // htis uri is to connect to the DB 
 const dbConnectionString = 'mongodb+srv://Abdu:Abdo2204@sudmandb.g9jq8k2.mongodb.net/sudmandb?retryWrites=true&w=majority&appName=sudmanDB';
