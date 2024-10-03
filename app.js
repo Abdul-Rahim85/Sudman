@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // htis uri is to connect to the DB 
-const dbConnectionString = 'mongodb+srv://Abdu:Abdo2204@sudmandb.g9jq8k2.mongodb.net/sudmandb?retryWrites=true&w=majority&appName=sudmanDB';
+const dbConnectionString = process.env.DB_URI;
 mongoose.connect(dbConnectionString, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
         console.log('connecting to the Database sccesfull');
