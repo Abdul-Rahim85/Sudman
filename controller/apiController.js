@@ -36,15 +36,16 @@ const  singup_post = async (req, res) => {
 
 // This function is check if the user tring to log in has an account or not
 const login_post = async (req, res) => {
-    const user = req.body;
-    const existsUser = await User.findOne(user);
+    const {email, password} = req.body;
     
-    if(existsUser) {
+    try{
+        const user = await User.login(email, password);
         res.status(200).json({massage: "User is exists", User: existsUser});
-    } else {
-        res.status(404).json({massage: "User is not exists"});
+        
     }
-    
+    catch (err) {
+        res.status(404).json({massage: "User is not exists", Error: err});
+    }
 };
 
 // This function is used to get a device details includeing device owner
