@@ -38,8 +38,8 @@ userSchema.pre('save', async function (next) {
 });
 
 // Statics methode to login user
-userSchema.statics.login = async function(email, password) {
-    const user = await this.findOne({email});
+userSchema.statics.login = async function(phoneNumber, password) {
+    const user = await this.findOne({phoneNumber});
     if(user) {
         const auth = await bcrypt.compare(password, user.password);
         if(auth) {
@@ -48,7 +48,7 @@ userSchema.statics.login = async function(email, password) {
         throw Error('Incorrect password');
         
     }
-    throw Error ('Incorrect email');
+    throw Error ('Incorrect Phone number');
 }
 
 const User = mongoose.model('User', userSchema);

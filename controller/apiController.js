@@ -36,11 +36,11 @@ const  singup_post = async (req, res) => {
 
 // This function is check if the user tring to log in has an account or not
 const login_post = async (req, res) => {
-    const {email, password} = req.body;
+    const {phoneNumber, password} = req.body;
     
     try{
-        const user = await User.login(email, password);
-        res.status(200).json({massage: "User is exists", User: existsUser});
+        const user = await User.login(phoneNumber, password);
+        res.status(200).json({massage: "User is exists", user});
         
     }
     catch (err) {
