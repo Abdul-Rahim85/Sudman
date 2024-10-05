@@ -2,51 +2,39 @@ const User = require('../models/user');
 const Device = require('../models/device');
 
 // handle errors
-const handelErrors = (err) => {
-    console.log(err.massage, err.code);
+const handelErrors = (err) => {    
+    const errors = {
+        fullName: '',
+        email: '',
+        address: '',
+        phoneNumber: '',
+        picture: '',
+        password: ''
+    }
+    if(err.code === 11000) {
+        return 'Email or phone number are already registered';
+    }
     
+    if(err.message.includes('User validation failed')){
+        Object.values(err.errors).forEach(({properties}) => {
+            errors[properties.path] = properties.message;
+        });
+        return errors;
+    }
 }
 
-// This function is use to receive the user date and stor it in the DB
+// This function is use to receive the user date and store it in the DataBase
 const  singup_post = async (req, res) => {
     const newUserData = req.body ;
 
     try{
         const newUser = await User.create(newUserData);
-        res.status(201).json({massage: "User created successfully", newUser});
+        res.status(201).json({message: "User created successfully", newUser});
     }
     catch (err) {
-        handelErrors(err);
-        res.status(409).json({massage: "User data conflict: Email or phone number already exists", Error: err});
+        const errors = handelErrors(err);
+        res.status(400).json(errors);
     }
-
-//     const allUser = await User.find();
-//     if(allUser.length > 0){
-// // check if the email or phone number are exists
-//         for(let i = 0; i < allUser.length; i++){
-
-//             if(newUserData.email == allUser[i].email || newUserData.phoneNumber == allUser[i].phoneNumber){
-//                 res.status(409).json({massage: "User data conflict: Email or phone number already exists"});
-//                 break;
-
-//             } else if (i == allUser.length - 1){
-
-//                 const createNewUser = new User(newUserData);
-//                 const newUser = await createNewUser.save();
-//                 res.status(201).json({massage: "User created successfully", newUser});
-//             } 
-//         }
-
-//     } else {
-//         const createNewUser = new User(newUserData);
-//         createNewUser.save()
-//         .then(newUser => {
-//             res.status(201).json({massage: 'New user created successfully', newUser});
-//         })
-//         .catch(err => {
-//             res.status(500).send({massage: "can'n create this user", error: err})
-//         });
-//     }
 };
 
 // This function is check if the user tring to log in has an account or not

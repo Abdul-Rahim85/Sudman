@@ -1,6 +1,28 @@
 const User = require('../models/user');
 const Device = require('../models/device');
 
+const handelErrors = (err) => {
+    const errors = {
+        serialNum: '',
+        deviceName: '',
+        deviceOwner: '',
+        deviceBrand: '',
+        deviceCategory: '',
+        deviceColor: ''
+    }
+
+    if(err.code === 11000){
+        return 'Serial Number must be  unique'
+    }
+
+    if(err.message.includes('User validation failed')){
+        Object.values(err.errors).forEach(({properties}) => {
+            errors[properties.path] = properties.message;
+        });
+        return errors;
+    }
+}
+
 // This function get all devices that belong to spcefic user
 const devices_get = async (req, res) => {
     const allDevice = await Device.find({deviceOwner: req.params.id});
@@ -27,32 +49,13 @@ const device_get = async (req, res) => {
 const device_post = async (req, res) => {
     const newDeviceData = req.body;
 
-    const allDevice = await Device.find();
-    if(allDevice.length > 0){
-// check if the Device serial Number is exists
-        for(let i = 0; i < allDevice.length; i++){
+    try {
+        const newDevice = Device.create(newDeviceData);
+        res.status(201).json({message: "New device added successfully", newDevice});
 
-            if(newDeviceData.serialNum == allDevice[i].serialNum){
-                res.status(409).json({massage: "Device Serial number conflict: Device serial number already exists"});
-                break;
-
-            } else if (i == allDevice.length - 1){
-
-                const createNewDevice = new Device(newDeviceData);
-                const newDevice = await createNewDevice.save();
-                res.status(201).json({massage: "Device added successfully", newDevice});
-            } 
-        }
-
-    } else {
-        const createNewDevice = new Device(newDeviceData);
-        createNewDevice.save()
-        .then(newDevice => {
-            res.status(201).json({massage: 'New Device created successfully', newDevice});
-        })
-        .catch(err => {
-            res.status(500).send({massage: "can'n create this Device", error: err})
-        });
+    } catch (err) {
+        const errors = handelErrors(err)
+        res.status(400).json(errors)
     }
 }
 

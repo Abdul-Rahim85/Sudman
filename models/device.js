@@ -4,27 +4,28 @@ const Schema = mongoose.Schema;
 const deviceSchema = new Schema({
     serialNum: {
         type: String,
-        require: true
+        required: [true, 'Device serial Number is Required'],
+        unique: true
     },
     deviceName: {
         type: String,
-        require: true
+        required: [true, 'Device name is required']
     },
     deviceOwner: {
         type: String,
-        require: true
+        required: [true, 'Device owner is required']
     },
     deviceBrand: {
         type: String,
-        require: true
+        required: [true, 'Device Brand is required']
     },
     deviceCategory: {
         type: String,
-        require: true
+        required: [true, 'Device Category is required']
     },
     deviceColor: {
         type: String,
-        require: true
+        required: [true, 'Device color is required']
     },
     deviceStatus: {
         type: Boolean

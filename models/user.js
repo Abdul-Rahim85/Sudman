@@ -7,31 +7,31 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     fullName: {
         type: String,
-        require: true
+        required: [true, 'Name is required']
     },
     email: {
         type: String,
-        require: [true, 'Email is require'],
+        required: [true, 'Email is require'],
         unique: true,
         lowercase: true,
         validate: [isEmail, 'Please enter a valid email']
     },
     address: {
         type: String,
-        require: true
+        required: [true, 'Address is required']
     },
     phoneNumber: {
         type: Number,
-        require: [true, 'Phone number is require'],
+        required: [true, 'Phone number is require'],
         unique: true
     },
     picture: {
         type: Buffer,
-        require: true
+        required: [true, 'User picture is require']
     },
     password: {
         type: String,
-        require: [true, 'password is require']
+        required: [true, 'password is require']
     }
 }, { timestamps: true });
 
