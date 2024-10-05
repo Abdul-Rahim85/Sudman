@@ -58,7 +58,7 @@ const detectdevice_get = async (req, res) => {
     const deviceOwner = await User.findById(deviceDetails.deviceOwner);
 
     if(deviceDetails && deviceOwner) {
-        res.status(200).json({massage: "Device is exists", deviceDetails, deviceOwner});
+        res.status(200).json({message: "Device is exists", deviceDetails, deviceOwner});
     } else {
         res.status(404).json({massage: "Device is not exists"});
     }

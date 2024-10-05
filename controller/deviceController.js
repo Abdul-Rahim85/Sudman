@@ -12,15 +12,15 @@ const handelErrors = (err) => {
     }
 
     if(err.code === 11000){
-        return 'Serial Number must be  unique'
+        return 'Serial Number must be  unique';
     }
 
-    if(err.message.includes('User validation failed')){
+    if(err.message.includes('Device validation failed')){
         Object.values(err.errors).forEach(({properties}) => {
             errors[properties.path] = properties.message;
         });
-        return errors;
     }
+    return errors;
 }
 
 // This function get all devices that belong to spcefic user
@@ -50,7 +50,7 @@ const device_post = async (req, res) => {
     const newDeviceData = req.body;
 
     try {
-        const newDevice = Device.create(newDeviceData);
+        const newDevice = await Device.create(newDeviceData);
         res.status(201).json({message: "New device added successfully", newDevice});
 
     } catch (err) {
