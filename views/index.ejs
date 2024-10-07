@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-    <%- include('./layout/head.ejs') %>
+  <%- include('./layout/head.ejs') %>
 <body>
-    
-    <main>
-        <%- include('./layout/homeHeader.ejs') %>
-        <form action="/" method="post">
-            <input type="text" id="serialNumber" name="serialNumber" placeholder="أدخل الرقم التسلسلي" required>
-            <input type="submit" value="بحث">
-        </form>
-    </main>
+	
+	<header>
+		<a href="/dashboard"><img src="../img/dashboard2.svg" alt="dashboard Icone">لوحة التحكم</a>
+		<form action="/" method="post">
+			<label for="serialNumber"> البحث عن جهاز
+				<input type="text" id="serialNumber" name="serialNumber" placeholder="أدخل الرقم التسلسلي" required>
+			</label>
+			<input type="submit" value="بحث">
+		</form>
+		<img src="../img/logo.svg" alt="System logo">
+	</header>
+	<main>
+		<aside></aside>
+		<section class="main"></section>
+	</main>
 
-    <%- include('./layout/footer.ejs') %>
 </body>
 </html>
