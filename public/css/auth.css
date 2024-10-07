@@ -1,18 +1,83 @@
-main{
+*{
+  box-sizing: border-box;
+  margin: 0;
   padding: 0;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
 }
 
-main .left-section{
-  width: 55%;
+body {
+  width: 100%;
+  height: 100vh;
+  font-family: 'cairo';
+}
+
+
+main{
+  width: 100%;
   height: 100%;
-  background-color: red;
+  font-family: cairo;
+  padding: 0;
+  display: flex;
 }
 
 main .right-section{
-  width: 45%;
+  width: 40%;
+  display: flex;
+  flex-flow: column;
+}
+
+main .right-section img {
+  width: 150px;
+  height: 150px;
+  margin: 70px 0;
+  align-self: center;
+}
+
+main .right-section form {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main .right-section form label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+main .right-section form input {
+  width: 350px;
+  padding: 5px 2px;
+  outline-color: #1EBBEE;
+  font-size: 20px;
+  border: 2px solid #aaa;
+  border-radius: 5px;
+}
+
+main .right-section form #send {
+  margin-top: 30px;
+  font-weight: bolder;
+  border: 2px solid #1EBBEE;
+  background-color: #1EBBEE;
+  color: white;
+  
+}
+
+main .right-section form #send:hover{
+  background-color: #15506E;
+  color: #fff;
+  border-color: #15506E;
+}
+
+main .left-section{
+  width: 60%;
   height: 100%;
-  background-color: yellow;
+  background-color: #1EBBEE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .left-section img {
+  width: 300px;
+  height: 300px;
 }

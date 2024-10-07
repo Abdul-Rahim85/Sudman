@@ -17,12 +17,13 @@ const dbConnectionString = process.env.DB_URI;
 mongoose.connect(dbConnectionString, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
         console.log('connecting to the Database sccesfull');
-        app.listen(PORT)
     })
     .catch((err) => {
         console.log(err);
 
-    })
+    });
+
+app.listen(PORT)
 
 // app setting
 app.set('view engine', 'ejs');
@@ -47,3 +48,8 @@ app.use('/login', authRoute);
 
 // home page router
 app.use('/dashboard', dashboardRoute);
+
+// Not found page
+app.use('/', (req, res) => {
+    res.render('./404');
+})

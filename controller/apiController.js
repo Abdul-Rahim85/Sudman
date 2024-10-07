@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Device = require('../models/device');
+const jwt = require('jsonwebtoken');
 
 // handle errors
 const handelErrors = (err) => {    
@@ -23,13 +24,20 @@ const handelErrors = (err) => {
     }
 }
 
+// Create json web tokens;
+const maxAge = 1 * 60 * 60
+const creatToken = (id) => {
+    return jwt.sign(id, process.env.JWT_SECRET_KEY, {expiresIN: maxAge})
+}
+
 // This function is use to receive the user date and store it in the DataBase
 const  singup_post = async (req, res) => {
     const newUserData = req.body ;
 
     try{
         const newUser = await User.create(newUserData);
-        res.status(201).json({message: "User created successfully", newUser});
+        const token = creatToken(newUser._id);
+        res.status(201).json({message: "User created successfully", newUser, token});
     }
     catch (err) {
         const errors = handelErrors(err);
@@ -43,7 +51,8 @@ const login_post = async (req, res) => {
     
     try{
         const user = await User.login(phoneNumber, password);
-        res.status(200).json({massage: "User is exists", user});
+        const token = creatToken(user._id);
+        res.status(200).json({massage: "User is exists", user, token});
         
     }
     catch (err) {
