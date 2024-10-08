@@ -6,17 +6,15 @@ const requireAuth = (req, res, next) => {
 
   if(token) {
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decodedToken) => {
-      if(err) {
-        console.log(err);
-        
-        res.status(401).json({authorize: 'you are Unauthorized to access this resource'});
+      if(err) {        
+        res.status(401).json({authorize: 'غير مصرح لك الوصول لهذا الموارد'});
+
       } else {
-        console.log(decodedToken);
         next();
       }
     })
   } else {
-    res.status(401).json({authorize: 'you are Unauthorized to access this resource'});
+    res.status(401).json({authorize: 'غير مصرح لك الوصول لهذا الموارد'});
   }
 }
 
