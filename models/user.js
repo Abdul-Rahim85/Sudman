@@ -7,31 +7,31 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     fullName: {
         type: String,
-        required: [true, 'Name is required']
+        required: [true, 'يرجى إدخال الإسم الكامل']
     },
     email: {
         type: String,
-        required: [true, 'Email is require'],
+        required: [true, 'البريد الإلكتروني مطلوب'],
         unique: true,
         lowercase: true,
-        validate: [isEmail, 'Please enter a valid email']
+        validate: [isEmail, 'الرجاء إدخال بريد إلكتروني صحيح']
     },
     address: {
         type: String,
-        required: [true, 'Address is required']
+        required: [true, 'العنوان مطلوب']
     },
     phoneNumber: {
         type: Number,
-        required: [true, 'Phone number is require'],
+        required: [true, 'رقم الهاتف مطلوب'],
         unique: true
     },
     picture: {
         type: Buffer,
-        required: [true, 'User picture is require']
+        required: [true, 'الصورة الشخصية مطلوبة']
     },
     password: {
         type: String,
-        required: [true, 'password is require']
+        required: [true, 'الرجاء إدخال كلمة المرور']
     }
 }, { timestamps: true });
 
