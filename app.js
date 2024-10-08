@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
+const { requireAuth } = require('./authMiddleware');
 const apiRoute = require('./routes/api/apiRoute')
 const deviceRoute = require('./routes/api/deviceRoute');
 const dashboardRoute = require('./routes/web/dashboardRoute');
@@ -33,15 +33,14 @@ app.set('view engine', 'ejs');
 app.use([
     express.urlencoded({ extended: false }),
     express.static(path.join(__dirname, 'public')),
-    express.json(),
-    cookieParser()
+    express.json()
 ]);
 
 // API Router
 app.use('/api/v1', apiRoute);
 
 // API Device Router
-app.use('/api/v1/devices', deviceRoute);
+app.use('/api/v1/devices', requireAuth, deviceRoute);
 
 // Auth pages route
 app.use('/login', authRoute);
