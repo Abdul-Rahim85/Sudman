@@ -59,14 +59,3 @@ userSchema.statics.login = async function(phoneNumber, password) {
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
-
-/*
-    {
-    "fullName" : "Ibrahim Muhamed Abdulrahim Ibrahim",
-    "email" : "ibmo@gmail.com",
-    "address" : "Khartoum",
-    "phoneNumber" : 966867597,
-    "picture" :"Ibrahim Picture",
-    "password" : "IbMo123#"
-}
-*/

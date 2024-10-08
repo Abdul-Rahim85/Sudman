@@ -12,7 +12,7 @@ const handelErrors = (err) => {
     }
 
     if(err.code === 11000){
-        return 'Serial Number must be  unique';
+        return 'هذا الرقم التسلسلي مربوط بجهاز';
     }
 
     if(err.message.includes('Device validation failed')){
@@ -30,7 +30,7 @@ const devices_get = async (req, res) => {
     if(allDevice.length > 0){
         res.status(200).json({massage: "successfull retriving user devices", devices: allDevice});
     } else {
-        res.status(404).json({massage: "This user has no devices"})
+        res.status(404).json({massage: "ليس لديك اي أجهزة"})
     }
 };
 
@@ -103,7 +103,7 @@ const owner_get = async (req, res) => {
     if(newOwner){
         res.status(200).json({massage: "User to transfer ownership to him", newOwner})
     } else {
-        res.status(404).json({massage: "No user exists with this phone number"});
+        res.status(404).json({massage: "لا يوجد مستخدم مسجل برقم الهاتف هذا"});
     }
 }
 

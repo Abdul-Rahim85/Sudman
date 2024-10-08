@@ -14,7 +14,7 @@ const handelErrors = (err) => {
         password: ''
     }
     if(err.code === 11000) {
-        return 'Email or phone number are already registered';
+        return 'البريد الإلكتروني او رقم الهاتف مسجلا بالفعل';
     }
     
     if(err.message.includes('User validation failed')){
@@ -38,7 +38,7 @@ const  singup_post = async (req, res) => {
     try{
         const newUser = await User.create(newUserData);
         const token = creatToken({userId: newUser._id});
-        res.status(201).json({message: "User created successfully", newUser, token});
+        res.status(201).json({message: "تم إنشاء الحساب بنجاح", newUser, token});
     }
     catch (err) {
         const errors = handelErrors(err);
@@ -53,13 +53,13 @@ const login_post = async (req, res) => {
     try{
         const user = await User.login(phoneNumber, password);
         const token = creatToken({userId: user._id});
-        res.status(200).json({massage: "User is exists", user, token});
+        res.status(200).json({massage: "المستخدم موجود", user, token});
         
     }
     catch (err) {
         console.log(err);
         
-        res.status(404).json({massage: "User is not exists", Error: err});
+        res.status(404).json({massage: "لايوجد مستخدم", Error: err});
     }
 };
 
@@ -70,9 +70,9 @@ const detectdevice_get = async (req, res) => {
     const deviceOwner = await User.findById(deviceDetails.deviceOwner);
 
     if(deviceDetails && deviceOwner) {
-        res.status(200).json({message: "Device is exists", deviceDetails, deviceOwner});
+        res.status(200).json({message: "الجهاز موجود", deviceDetails, deviceOwner});
     } else {
-        res.status(404).json({massage: "Device is not exists"});
+        res.status(404).json({massage: "لايوجد جهاز"});
     }
 }
 
@@ -81,9 +81,9 @@ const user_put = async (req, res) => {
 
     if(await User.findById(req.params.id)) {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body);
-        res.status(200).json({massage: "User personal data update successfully", updatedUser});
+        res.status(200).json({massage: "تم تعديل البيانات بنجاح", updatedUser});
     } else {
-        res.status(404).json({massage: "There is no user with this id!"});
+        res.status(404).json({massage: "لا يوجد مستخدم"});
     }
 }
 

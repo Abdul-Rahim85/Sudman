@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 const deviceSchema = new Schema({
     serialNum: {
         type: String,
-        required: [true, 'Device serial Number is Required'],
+        required: [true, 'الرقم التسلسلي مطلوب'],
         unique: true
     },
     deviceName: {
         type: String,
-        required: [true, 'Device name is required']
+        required: [true, 'إسم الجهاز مطلوب']
     },
     deviceOwner: {
         type: String,
@@ -17,15 +17,15 @@ const deviceSchema = new Schema({
     },
     deviceBrand: {
         type: String,
-        required: [true, 'Device Brand is required']
+        required: [true, 'ماركة الجهاز مطلوبه']
     },
     deviceCategory: {
         type: String,
-        required: [true, 'Device Category is required']
+        required: [true, 'نوع الجهاز مطلوب']
     },
     deviceColor: {
         type: String,
-        required: [true, 'Device color is required']
+        required: [true, 'لون الجهاز مطلوب']
     },
     deviceStatus: {
         type: Boolean
@@ -36,18 +36,3 @@ const deviceSchema = new Schema({
 const Device = mongoose.model('Device', deviceSchema);
 
 module.exports = Device;
-
-// a device data
-/*
-
-    
-{
-    "serialNum" : 123456789,
-    "deviceName" : "J6+",
-    "deviceOwner" : "66faf718776da5719dbf4a91",
-    "deviceBrand" : "Samsung",
-    "deviceCategory" : "Smart Phone",
-    "deviceColor": "Black",
-    "deviceStatus" : false
-}
-*/
