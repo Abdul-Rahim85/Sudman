@@ -10,16 +10,15 @@
 
 body{
   width: 100%;
-  height: 100%;
-  font-family: cairo;
+  height: 100vh;
   display: flex;
   flex-flow: column wrap;
 }
 
 body header {
   width: 100%;
-  height: 10%;
-
+  height: 15%;
+  background-color: #1EBBEE;
   padding: 0 50px;
   display: flex;
   justify-content: space-between;
@@ -34,14 +33,14 @@ body header a {
 }
 
 body header a img {
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
   margin: 0 0 5px 10px;
 }
 
 body header img {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
 }
 
 body header form {
@@ -51,45 +50,103 @@ body header form {
 
 body header form label {
   font-size: 20px;
+  font-family: Cairo;
   font-weight: bold;
+  color: white;
 }
 
 body header form label #serialNumber{
   width: 300px;
-  padding: 5px 3px;
-  border: 2px solid #aaa;
-  outline-color: #1EBBEE;
+  padding: 0 3px 5px;
+  border: 2px solid white;
+  outline-color: rgb(30, 187, 238);
   border-radius: 0 3px 3px 0;
   outline: none;
 }
 
 body header form #sendData {
-  height: 43px;
-  margin-right: -1px;
-  padding: 0 5px 3px 5px;
+  height: 38px;
+  padding: 0 10px 10px 10px;
   font-size: 20px;
   font-weight: bold;
   outline: none;
   border-radius: 3px 0 0 3px;
-  border: 1px solid #1EBBEE;
-  border-right: none;
+  border: 2px solid white;
   background-color: #1EBBEE;
   color: white;
 }
 
+body header form #sendData img {
+  width: 20px;
+  height: 20px;
+}
+
 body main {
   width: 100%;
-  height: 90%;
+  height: 85%;
+  display: flex;
 }
 
 body main aside {
-  width: 25%;
+  width: 20%;
+  height: 100%;
+  background-color: #1EBBEE;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+body main aside form {
   height: 90%;
-  background-color: azure;
+  font-family: Cairo;
+  font-size: 20px;
+  font-weight: bold;
+  padding-right: 5%;
+  color: white;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+}
+
+
+body main aside form .dashboardView{
+  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+body main aside form input[type="radio"]{
+  padding: 10px;
+  border: 2px solid white;
+}
+
+body main aside form select {
+  width: 90%;
+  height: 40px;
+  color: #1EBBEE;
+  border: 2px solid #1EBBEE;
+  outline-color: #1EBBEE;
+  border-radius: 3px;
+}
+
+body main aside a{
+  width: 100%;
+  background-color: white;
+  align-self: center;
+  display: flex;
+  height: 10%;
+  text-decoration: none;
+  color: white;
+  font-family: Cairo;
+}
+
+body main aside a img {
+  width: 20px;
+  height: 20px;
 }
 
 body main section {
-  width: 75%;
-  height: 90%;
-  background-color: yellow;
+  width: 80%;
+  height: 100%;
+  background-color: black;
 }
