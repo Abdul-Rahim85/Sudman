@@ -26,7 +26,7 @@ const handelErrors = (err) => {
 }
 
 // Create json web tokens
-const maxAge = 1 * 60 * 60
+const maxAge = 7 * 24 * 1 * 60 * 60
 const creatToken = (id) => {
     return jwt.sign(id, process.env.JWT_SECRET_KEY, {expiresIn: maxAge})
 }
@@ -80,7 +80,7 @@ const detectdevice_get = async (req, res) => {
 const user_put = async (req, res) => {
 
     if(await User.findById(req.params.id)) {
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body);
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.status(200).json({massage: "تم تعديل البيانات بنجاح", updatedUser});
     } else {
         res.status(404).json({massage: "لا يوجد مستخدم"});

@@ -7,7 +7,7 @@ const requireAuth = (req, res, next) => {
   if(token) {
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decodedToken) => {
       if(err) {        
-        res.status(401).json({authorize: 'غير مصرح لك الوصول لهذا الموارد'});
+        res.status(401).json({authorize: 'غير مصرح لك الوصول لهذه الموارد'});
 
       } else {
         next();
