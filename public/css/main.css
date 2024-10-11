@@ -5,7 +5,7 @@
 }
 
 :root{
-  --primary-color: #01baef;
+  --primary-color: #0D4F6C;
 }
 
 body{
@@ -18,7 +18,7 @@ body{
 body header {
   width: 100%;
   height: 15%;
-  background-color: #1EBBEE;
+  background-color: var(--primary-color);
   padding: 0 50px;
   display: flex;
   justify-content: space-between;
@@ -59,7 +59,7 @@ body header form label #serialNumber{
   width: 300px;
   padding: 0 3px 5px;
   border: 2px solid white;
-  outline-color: rgb(30, 187, 238);
+  outline-color: var(--primary-color);
   border-radius: 0 3px 3px 0;
   outline: none;
 }
@@ -72,7 +72,7 @@ body header form #sendData {
   outline: none;
   border-radius: 3px 0 0 3px;
   border: 2px solid white;
-  background-color: #1EBBEE;
+  background-color: var(--primary-color);
   color: white;
 }
 
@@ -87,10 +87,12 @@ body main {
   display: flex;
 }
 
+/* The aside styles */
 body main aside {
   width: 20%;
   height: 100%;
-  background-color: #1EBBEE;
+  border: 2px solid var(--primary-color);
+  background-color: var(--primary-color);
   display: flex;
   flex-flow: column;
   justify-content: space-between;
@@ -123,30 +125,35 @@ body main aside form input[type="radio"]{
 body main aside form select {
   width: 90%;
   height: 40px;
-  color: #1EBBEE;
-  border: 2px solid #1EBBEE;
-  outline-color: #1EBBEE;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  outline-color: var(--primary-color);
   border-radius: 3px;
 }
 
 body main aside a{
   width: 100%;
   background-color: white;
+  font-family: Cairo;
+  font-weight: bold;
+  font-size: 20px;
   align-self: center;
   display: flex;
+  justify-content: center;
+  align-items: center;
   height: 10%;
   text-decoration: none;
-  color: white;
-  font-family: Cairo;
+  color: var(--primary-color);
 }
 
 body main aside a img {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
 }
 
+/*main page style*/
 body main section {
   width: 80%;
   height: 100%;
-  background-color: black;
 }
