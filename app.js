@@ -46,7 +46,7 @@ app.use('/api/v1/devices', requireAuth, deviceRoute);
 app.use('/login', authRoute);
 
 // home page router
-app.use('/dashboard', dashboardRoute);
+app.use('/dashboard', requireAuth, dashboardRoute);
 
 // Not found page
 app.use('/', (req, res) => {

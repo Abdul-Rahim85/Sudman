@@ -56,9 +56,7 @@ const login_post = async (req, res) => {
         res.status(200).json({massage: "المستخدم موجود", user, token});
         
     }
-    catch (err) {
-        console.log(err);
-        
+    catch (err) {        
         res.status(404).json({massage: "لايوجد مستخدم", Error: err});
     }
 };
