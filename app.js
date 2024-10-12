@@ -2,7 +2,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const { requireAuth } = require('./authMiddleware');
-const apiRoute = require('./routes/api/apiRoute')
+const apiRoute = require('./routes/api/apiRoute');
+const cookieParser = require('cookie-parser');
+const authController = require('./controller/authController');
 const deviceRoute = require('./routes/api/deviceRoute');
 const dashboardRoute = require('./routes/web/dashboardRoute');
 const authRoute = require('./routes/web/authRoute');
@@ -33,7 +35,8 @@ app.set('view engine', 'ejs');
 app.use([
     express.urlencoded({ extended: false }),
     express.static(path.join(__dirname, 'public')),
-    express.json()
+    express.json(),
+    cookieParser()
 ]);
 
 // API Router
@@ -47,6 +50,8 @@ app.use('/login', authRoute);
 
 // home page router
 app.use('/dashboard', requireAuth, dashboardRoute);
+
+app.get('/logout', authController.logout_get)
 
 // Not found page
 app.use('/', (req, res) => {

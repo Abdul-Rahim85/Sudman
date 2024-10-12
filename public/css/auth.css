@@ -44,6 +44,10 @@ main .right-section form {
   align-items: center;
 }
 
+main .right-section form .error {
+  color: red;
+}
+
 main .right-section form label {
   font-size: 20px;
   font-weight: bold;

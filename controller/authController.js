@@ -34,18 +34,25 @@ const {userName, password} = req.body;
 try{
     const admin = await Admin.login(userName, password);
     const token = creatToken({adminId: admin._id});
-    res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});
+    res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000});    
     res.status(200).json({admin: admin._id});
-    
 }
-catch (err) {       
+catch (err) { 
+    console.log(err);
     const errors = handelErrors(err);
+    
     res.status(404).json({errors});
 }
 
 }
 
+const logout_get = (req, res) => {
+    res.cookie('jwt', '', {maxAge: 1});
+    res.status(200).redirect('/login');
+}
+
 module.exports = {
     login_get,
-    login_post
+    login_post,
+    logout_get
 }

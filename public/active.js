@@ -19,13 +19,13 @@ form.addEventListener('submit', async (e) => {
       body: JSON.stringify({userName, password}),
       headers: {'Content-Type': 'application/json'}
     });
-    const data = await res.json();
-
+    const data = await res.json();    
     if (data.errors) {
       userNameError.textContent = data.errors.userName;
       passwordError.textContent = data.errors.password;
     }
-    if(data.user) {
+
+    if(data.admin) {
       location.assign('/dashboard');
     }
 

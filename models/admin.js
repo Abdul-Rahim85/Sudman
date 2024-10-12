@@ -17,7 +17,7 @@ const adminSchema = new Schema({
 
 adminSchema.statics.login = async function(userName, password) {
     const admin = await this.findOne({userName});
-    if(user) {
+    if(admin) {
         const auth = await bcrypt.compare(password, admin.password);
         if(auth) {
             return admin;

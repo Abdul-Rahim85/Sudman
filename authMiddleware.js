@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const requireAuth = (req, res, next) => {
-  const token = req.headers['authorization'];
+  let token = '';
+  req.originalUrl === '/dashboard'? token = req.cookies.jwt : token = req.headers['authorization'];
+  
 
   if(token) {
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decodedToken) => {
@@ -15,7 +17,7 @@ const requireAuth = (req, res, next) => {
 
       } else {
         if (req.originalUrl == '/dashboard') {
-          res.status(200).render('/dashboard');
+          res.status(200).render('./index');
         } else{
           
           next();
