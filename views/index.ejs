@@ -5,7 +5,7 @@
 	
 	<header>
 		<a href="/dashboard"><img src="../img/homeLogo.svg" alt="dashboard Icone"></a>
-		<form action="/" method="post">
+		<form id="detectDevice">
 			<label for="serialNumber"> البحث عن جهاز
 				<input type="text" id="serialNumber" name="serialNumber" placeholder="أدخل الرقم التسلسلي" required>
 			</label>
@@ -121,7 +121,7 @@
 				</ul>
 			</nav>
 
-			<section class="report">
+		<section class="report">
 				<div class="thead">
 					<div>الرقم</div>
 					<div>الرقم المتسلسل</div>
@@ -132,90 +132,46 @@
 					<div>المالك</div>
 					<div>حالة الجهاز</div>
 				</div>
+				<%if(devices) {%>
+					<% async (devices) => {%>
+						<% let index = 1 %>
+						<% for(const device of devices) { %>
+						<div class="tbody">
+							<div><% index %></div>
+							<div><%= device.serialNum %></div>
+							<div><%= device.deviceName %></div>
+							<div><%= device.deviceCategory %></div>
+							<div><%= device.deviceBrand %></div>
+							<div><%= device.deviceColor %></div>
+							<div>
+								<% const res = await fetch(`/dashboard/deviceOwner/${device.deviceOwner}`, { method: 'GET'}); %>
+								<% const data = await res.json()%>
+								<%= data.deviceOwner %>
+							</div>
 
-				<div class="tbody">
-					<div>1</div>
-					<div>R58M12T4M3F</div>
-					<div>J6 Plus</div>
-					<div>هاتف</div>
-					<div>سامسونج</div>
-					<div>اسود</div>
-					<div>عبدالرحيم محمد عبدالرحيم</div>
-					<div>موجود</div>
-				</div>
+							<div>
+								<% if(devic.deviceStatus) { %>
+									موجود
+								<%} else {%>
+									مفقود
+								<% } %>
+							</div>
 
-				<div class="tbody">
-					<div>1</div>
-					<div>R58M12T4M3F</div>
-					<div>J6 Plus</div>
-					<div>هاتف</div>
-					<div>سامسونج</div>
-					<div>اسود</div>
-					<div>عبدالرحيم محمد عبدالرحيم</div>
-					<div>موجود</div>
-				</div>
+						</div>
+						<% index++ %>
+						
+						<% } %>
 
-				<div class="tbody">
-					<div>1</div>
-					<div>R58M12T4M3F</div>
-					<div>J6 Plus</div>
-					<div>هاتف</div>
-					<div>سامسونج</div>
-					<div>اسود</div>
-					<div>عبدالرحيم محمد عبدالرحيم</div>
-					<div>موجود</div>
-				</div>
+					<% } %>
 
-				<div class="tbody">
-					<div>1</div>
-					<div>R58M12T4M3F</div>
-					<div>J6 Plus</div>
-					<div>هاتف</div>
-					<div>سامسونج</div>
-					<div>اسود</div>
-					<div>عبدالرحيم محمد عبدالرحيم</div>
-					<div>موجود</div>
-				</div>
-
-				<div class="tbody">
-					<div>1</div>
-					<div>R58M12T4M3F</div>
-					<div>J6 Plus</div>
-					<div>هاتف</div>
-					<div>سامسونج</div>
-					<div>اسود</div>
-					<div>عبدالرحيم محمد عبدالرحيم</div>
-					<div>موجود</div>
-				</div>
-
-				<div class="tbody">
-					<div>1</div>
-					<div>R58M12T4M3F</div>
-					<div>J6 Plus</div>
-					<div>هاتف</div>
-					<div>سامسونج</div>
-					<div>اسود</div>
-					<div>عبدالرحيم محمد عبدالرحيم</div>
-					<div>موجود</div>
-				</div>
-
-				<div class="tbody">
-					<div>1</div>
-					<div>R58M12T4M3F</div>
-					<div>J6 Plus</div>
-					<div>هاتف</div>
-					<div>سامسونج</div>
-					<div>اسود</div>
-					<div>عبدالرحيم محمد عبدالرحيم</div>
-					<div>موجود</div>
-				</div>
-
-
+				<%} else {%>
+					There is no Devices
+				<%}%>
 			</section>
 
 
 		</section>
 	</main>
-
+	<script src="../active.js"></script>
 </body>
 </html>

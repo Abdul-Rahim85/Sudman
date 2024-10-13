@@ -1,3 +1,4 @@
+// This code process the login request and respons
 const form = document.querySelector('form');
 const userNameError = document.querySelector('.userName.error')
 const passwordError = document.querySelector('.password.error');
@@ -32,4 +33,22 @@ form.addEventListener('submit', async (e) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+// This part of code is used to send request to get a device details
+const detectDeviceForm = document.getElementById('detectDevice');
+
+detectDeviceForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const deviceSerialNumber = detectDeviceForm.serialNumber.value;
+
+  try {
+    const res = await fetch(`/dashboard/detectDevice/${deviceSerialNumber}`,{
+      method: 'GET',
+    });
+  } catch (err) {
+    console.log(err);
+    
+  }
+
 })

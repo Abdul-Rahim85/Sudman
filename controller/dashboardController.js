@@ -1,12 +1,39 @@
-const dashboard_get = (req, res) => {
-    res.render('index');
+const Device = require('../models/device');
+const User = require('../models/user');
+
+const dashboard_get = async (req, res) => {
+    const devices = await Device.find();
+    
+    res.render('./index', {devices});
 }
 
-const dashboard_post = (req, res) => {
-    res.send('Done!');
+// This function get all devices
+const detectDevice_get = async (req, res) => {
+    const device = await Device.findOne({serialNum: req.params.id});
+    if(device) {
+        const deviceOwner = await User.findById(device.deviceOwner);
+        if(deviceOwner){
+            res.status(200).json({device, deviceOwner});
+        } else {
+            res.status(200).json({device, deviceOwner: 'This device has no user'});
+        }
+    } else {
+        res.status(404).json({message: 'There is no device with this serail Number'});
+    }
+}
+
+// This function get the device owner Name
+const deviceOwner_get = async (req, res) => {
+    const deviceOwner = await User.findById(req.params.id);
+    if(deviceOwner) {
+        res.status(200).json({deviceOwner: deviceOwner.fullName});
+    } else {
+        res.status(404).json({message: 'There is no user'})
+    }
 }
 
 module.exports = {
     dashboard_get,
-    dashboard_post
+    detectDevice_get,
+    deviceOwner_get
 }

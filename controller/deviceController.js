@@ -65,7 +65,7 @@ const device_post = async (req, res) => {
 
     try {
         const newDevice = await Device.create(newDeviceData);
-        res.status(201).json({message: "New device added successfully", newDevice});
+        res.status(201).json({message: "تم إضافة جهاز بنجاح", newDevice});
 
     } catch (err) {
         const errors = handelErrors(err)
