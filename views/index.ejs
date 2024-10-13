@@ -3,6 +3,57 @@
   <%- include('./layout/head.ejs') %>
 <body>
 	
+		<!-- This function is used to creat a devices report -->
+		<% async function devicesReport(devices) {%>
+			<section class="report">
+				<div class="thead">
+					<div>الرقم</div>
+					<div>الرقم المتسلسل</div>
+					<div>إسم الجهاز</div>
+					<div>نوع الجهاز</div>
+					<div>الشركة المصنعة</div>
+					<div>اللون</div>
+					<div>المالك</div>
+					<div>حالة الجهاز</div>
+				</div>
+				<%if(devices) {%>
+					<% let index = 1 %>
+					<% for(const device of devices) { %>
+						<div class="tbody">
+							<div><%= index %></div>
+							<div><%= device.serialNum %></div>
+							<div><%= device.deviceName %></div>
+							<div><%= device.deviceCategory %></div>
+							<div><%= device.deviceBrand %></div>
+							<div><%= device.deviceColor %></div>
+						<div>
+					<% for(let i = 0; i < users.length; i++) { %>
+						<% if(device.deviceOwner == users[i]._id) {%>
+							<%= users[i].fullName %>
+							<% break %>
+						<% } %>
+					<% } %>
+				</div>
+
+				<div>
+					<% if(!device.deviceStatus) { %>
+						موجود
+					<%} else {%>
+						مفقود
+					<% } %>
+				</div>
+
+			</div>
+			<% index++ %>
+			
+			<% } %>
+			<%} else {%>
+				There is no Devices
+			<%}%>
+		</section>
+	<% } %>
+
+	
 	<header>
 		<a href="/dashboard"><img src="../img/homeLogo.svg" alt="dashboard Icone"></a>
 		<form id="detectDevice">
@@ -120,56 +171,9 @@
 					</li>
 				</ul>
 			</nav>
-
-		<section class="report">
-				<div class="thead">
-					<div>الرقم</div>
-					<div>الرقم المتسلسل</div>
-					<div>إسم الجهاز</div>
-					<div>نوع الجهاز</div>
-					<div>الشركة المصنعة</div>
-					<div>اللون</div>
-					<div>المالك</div>
-					<div>حالة الجهاز</div>
-				</div>
-				<%if(devices) {%>
-					<% async (devices) => {%>
-						<% let index = 1 %>
-						<% for(const device of devices) { %>
-						<div class="tbody">
-							<div><% index %></div>
-							<div><%= device.serialNum %></div>
-							<div><%= device.deviceName %></div>
-							<div><%= device.deviceCategory %></div>
-							<div><%= device.deviceBrand %></div>
-							<div><%= device.deviceColor %></div>
-							<div>
-								<% const res = await fetch(`/dashboard/deviceOwner/${device.deviceOwner}`, { method: 'GET'}); %>
-								<% const data = await res.json()%>
-								<%= data.deviceOwner %>
-							</div>
-
-							<div>
-								<% if(devic.deviceStatus) { %>
-									موجود
-								<%} else {%>
-									مفقود
-								<% } %>
-							</div>
-
-						</div>
-						<% index++ %>
-						
-						<% } %>
-
-					<% } %>
-
-				<%} else {%>
-					There is no Devices
-				<%}%>
-			</section>
-
-
+			
+			<% devicesReport(devices) %>
+				
 		</section>
 	</main>
 	<script src="../active.js"></script>

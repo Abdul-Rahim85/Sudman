@@ -51,4 +51,5 @@ detectDeviceForm.addEventListener('submit', async (e) => {
     
   }
 
-})
+});
+
