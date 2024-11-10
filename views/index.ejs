@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <%- include('./layout/head.ejs') %>
+<body>
+	
+		<!-- This function is used to creat a devices report -->
+		<% async function devicesReport(devices) {%>
+			<section class="report">
+				<div class="thead">
+					<div>الرقم</div>
+					<div>الرقم المتسلسل</div>
+					<div>إسم الجهاز</div>
+					<div>نوع الجهاز</div>
+					<div>الشركة المصنعة</div>
+					<div>اللون</div>
+					<div>المالك</div>
+					<div>حالة الجهاز</div>
+				</div>
+				<%if(devices) {%>
+					<% let index = 1 %>
+					<% for(const device of devices) { %>
+						<div class="tbody">
+							<div><%= index %></div>
+							<div><%= device.serialNum %></div>
+							<div><%= device.deviceName %></div>
+							<div><%= device.deviceCategory %></div>
+							<div><%= device.deviceBrand %></div>
+							<div><%= device.deviceColor %></div>
+						<div>
+					<% for(let i = 0; i < users.length; i++) { %>
+						<% if(device.deviceOwner == users[i]._id) {%>
+							<%= users[i].fullName %>
+							<% break %>
+						<% } %>
+					<% } %>
+				</div>
+
+				<div>
+					<% if(!device.deviceStatus) { %>
+						موجود
+					<%} else {%>
+						مفقود
+					<% } %>
+				</div>
+
+			</div>
+			<% index++ %>
+			
+			<% } %>
+			<%} else {%>
+				There is no Devices
+			<%}%>
+		</section>
+	<% } %>
+
+	
+	<header>
+		<a href="/dashboard"><img src="../img/homeLogo.svg" alt="dashboard Icone"></a>
+		<form id="detectDevice">
+			<label for="serialNumber"> البحث عن جهاز
+				<input type="text" id="serialNumber" name="serialNumber" placeholder="أدخل الرقم التسلسلي" required>
+			</label>
+			<button id="sendData" type="submit"><img src="../img/searchWhite.svg" alt="search Log"></button>
+		</form>
+		<img src="../img/mainLogo.svg" alt="System logo">
+	</header>
+	<main>
+
+		<aside>
+			<form action="">
+				<div class="dashboardView">
+					<input type="radio" name="dashboardView">&nbsp;&nbsp;أجهزة&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="dashboardView">&nbsp;&nbsp;مستخدمين
+				</div>
+				
+
+				<label for="deviceType">نوع الجهاز<br>
+					<select name="deviceType" id="deviceType">
+						<option value="all">الكل</option>
+						<option value="smartPhone">هواتف</option>
+						<option value="laptop">لابتوبات</option>
+						<option value="taplat">تابلت</option>
+						<option value="camera">كاميرات</option>
+					</select>
+				</label>
+
+				<label for="deviceBrand">الشركة المصنعة<br>
+					<select name="deviceBrand" id="deviceBrand">
+						<option value="All">الكل</option>
+						<option value="Samsung">سامسونج</option>
+						<option value="Apple">آبل</option>
+						<option value="Huawei">هواوي</option>
+						<option value="OPPO">اووبو</option>
+						<option value="Oneplus">ون بلص</option>
+						<option value="Xiaomi">شاومي</option>
+						<option value="Realme">ريلمي</option>
+						<option value="Nokia">نوكيا</option>
+						<option value="Sony">سوني</option>
+						<option value="HTC">اتش تي سي</option>
+						<option value="LG">ل جي</option>
+						<option value="pixel">بيكسل</option>
+						<option value="Techno">تكنو</option>
+						<option value="Lenovo">لينوفو</option>
+						<option value="Infinix">انفينكس</option>
+						<option value="Dell">ديل</option>
+						<option value="HP">اتش بي</option>
+						<option value="Toshiba">توشيبا</option>
+						<option value="Acer">ايسر</option>
+						<option value="Microsoft">مايكروسوفت</option>
+						<option value="Nikon">نيكون</option>
+					</select>
+				</label>
+				<label for="deviceStatus">حالة الجهاز<br>
+					<input type="radio" name="deviceStatus">&nbsp;&nbsp;موجود&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="deviceStatus">&nbsp;&nbsp;مفقود
+				</label>
+			</form>
+			<a href="/logout"><img src="../img/logout.svg" alt="Log out icone">تسجيل الخروج</a>
+		</aside>
+
+		<section class="main">
+			<nav>
+				<ul>
+					<li>
+						<a href="#">
+							<img src="../img/user.svg" alt="user icone">
+							<p>0</p>
+						</a>
+					</li>
+
+					<li>
+						<a href="#">
+							<img src="../img/devices.svg" alt="devices icone">
+							<p>0</p>
+						</a>
+					</li>
+
+					<li>
+						<a href="#">
+							<img src="../img/smartPhone.svg" alt="smart phone icone">
+							<p>0</p>
+						</a>
+					</li>
+
+					<li>
+						<a href="#">
+							<img src="../img/laptop.svg" alt="laptop icone">
+							<p>0</p>
+						</a>
+					</li>
+
+					<li>
+						<a href="#">
+							<img src="../img/tablet.svg" alt="tablet icone">
+							<p>0</p>
+						</a>
+					</li>
+
+					<li>
+						<a href="#">
+							<img src="../img/camera.svg" alt="camera icone">
+							<p>0</p>
+						</a>
+					</li>
+
+					<li>
+						<a href="#">
+							<img src="../img/lost.svg" alt="icone">
+							<p>0</p>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			
+			<% devicesReport(devices) %>
+				
+		</section>
+	</main>
+	<script src="../active.js"></script>
+</body>
+</html>
