@@ -26,6 +26,8 @@ const handelErrors = (err) => {
 // This function get all devices that belong to spcefic user
 const devices_get = async (req, res) => {
     const allDevice = await Device.find({deviceOwner: req.params.id});
+    const query = req.query.category;
+    
 
     if(allDevice.length > 0){
         res.status(200).json({massage: "successfull retriving user devices", devices: allDevice});

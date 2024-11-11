@@ -45,6 +45,10 @@ const  singup_post = async (req, res) => {
         res.status(400).json(errors);
     }
 };
+// This function is used to upload picture
+const uploadpictures_post = async (req, res) => {
+    
+}
 
 // This function is check if the user tring to log in has an account or not
 const login_post = async (req, res) => {
@@ -88,6 +92,7 @@ const user_put = async (req, res) => {
 module.exports = {
     login_post,
     singup_post,
+    uploadpictures_post,
     detectdevice_get,
     user_put
 };
