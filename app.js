@@ -56,4 +56,4 @@ app.get('/logout', authController.logout_get)
 // Not found page
 app.use('/', (req, res) => {
     res.render('./404');
-})
+});

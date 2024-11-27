@@ -27,10 +27,37 @@ const handelErrors = (err) => {
 const devices_get = async (req, res) => {
     const allDevice = await Device.find({deviceOwner: req.params.id});
     const query = req.query.category;
+
+    let devices = {
+        smartPhone: [],
+        laptop: [],
+        taplet: [],
+        camera: [],
+        other: []
+    }
     
+    for (let i=0; i<allDevice.length; i++){
+        switch (allDevice[i].deviceCategory) {
+            case "موبايل":
+                devices.smartPhone.push(allDevice[i]);
+                break;
+            case "لابتوب":
+                devices.laptop.push(allDevice[i]);
+                break;
+            case "تابلت":
+                devices.taplet.push(allDevice[i]);
+                break;
+            case "كاميرا":
+                devices.camera.push(allDevice[i]);
+                break;
+            default:
+                devices.other.push(allDevice[i]);
+                break;
+        }
+    }
 
     if(allDevice.length > 0){
-        res.status(200).json({massage: "successfull retriving user devices", devices: allDevice});
+        res.status(200).json({massage: "successfull retriving user devices", devices});
     } else {
         res.status(404).json({massage: "ليس لديك اي أجهزة"})
     }
